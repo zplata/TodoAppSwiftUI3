@@ -24,6 +24,8 @@
 		C5B7DEB52682826800F3903A /* ViewContextMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B7DEB42682826800F3903A /* ViewContextMethods.swift */; };
 		C5B7DEB8268911BD00F3903A /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B7DEB7268911BD00F3903A /* Haptics.swift */; };
 		C5B7DEBB2689156800F3903A /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B7DEBA2689156800F3903A /* Menu.swift */; };
+		E5C4D2EB29A5485000F142A4 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = E5C4D2EA29A5485000F142A4 /* RiveRuntime */; };
+		E5C4D2EE29A5EBBA00F142A4 /* swipe.riv in Resources */ = {isa = PBXBuildFile; fileRef = E5C4D2ED29A5EBBA00F142A4 /* swipe.riv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,7 @@
 		C5B7DEB6268297C100F3903A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C5B7DEB7268911BD00F3903A /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		C5B7DEBA2689156800F3903A /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		E5C4D2ED29A5EBBA00F142A4 /* swipe.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = swipe.riv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5C4D2EB29A5485000F142A4 /* RiveRuntime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +82,7 @@
 		C58CD77C26813072002C21C6 /* TodoAppSwiftUI3 */ = {
 			isa = PBXGroup;
 			children = (
+				E5C4D2EC29A5EBB000F142A4 /* RiveAssets */,
 				C5B7DEB6268297C100F3903A /* Info.plist */,
 				C5B7DEBA2689156800F3903A /* Menu.swift */,
 				C58A7680268A590100385972 /* ContentView.swift */,
@@ -124,6 +129,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		E5C4D2EC29A5EBB000F142A4 /* RiveAssets */ = {
+			isa = PBXGroup;
+			children = (
+				E5C4D2ED29A5EBBA00F142A4 /* swipe.riv */,
+			);
+			path = RiveAssets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -140,6 +153,9 @@
 			dependencies = (
 			);
 			name = TodoAppSwiftUI3;
+			packageProductDependencies = (
+				E5C4D2EA29A5485000F142A4 /* RiveRuntime */,
+			);
 			productName = TodoAppSwiftUI3;
 			productReference = C58CD77A26813072002C21C6 /* TodoAppSwiftUI3.app */;
 			productType = "com.apple.product-type.application";
@@ -168,6 +184,9 @@
 				Base,
 			);
 			mainGroup = C58CD77126813072002C21C6;
+			packageReferences = (
+				E5C4D2E929A5485000F142A4 /* XCRemoteSwiftPackageReference "rive-ios" */,
+			);
 			productRefGroup = C58CD77B26813072002C21C6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -183,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C58CD78526813076002C21C6 /* Preview Assets.xcassets in Resources */,
+				E5C4D2EE29A5EBBA00F142A4 /* swipe.riv in Resources */,
 				C58CD78226813076002C21C6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,7 +359,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TodoAppSwiftUI3/Preview Content\"";
-				DEVELOPMENT_TEAM = 4T7X5D3BA4;
+				DEVELOPMENT_TEAM = F2K98M74Y7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TodoAppSwiftUI3/Info.plist;
@@ -358,7 +378,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.shelkford.TodoAppSwiftUI3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shelkford.TodoAppSwiftUI3s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -374,7 +394,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TodoAppSwiftUI3/Preview Content\"";
-				DEVELOPMENT_TEAM = 4T7X5D3BA4;
+				DEVELOPMENT_TEAM = F2K98M74Y7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TodoAppSwiftUI3/Info.plist;
@@ -393,7 +413,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.shelkford.TodoAppSwiftUI3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shelkford.TodoAppSwiftUI3s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -423,6 +443,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E5C4D2E929A5485000F142A4 /* XCRemoteSwiftPackageReference "rive-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rive-app/rive-ios";
+			requirement = {
+				kind = exactVersion;
+				version = 3.1.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E5C4D2EA29A5485000F142A4 /* RiveRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5C4D2E929A5485000F142A4 /* XCRemoteSwiftPackageReference "rive-ios" */;
+			productName = RiveRuntime;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		C58CD78826813076002C21C6 /* TodoAppSwiftUI3.xcdatamodeld */ = {

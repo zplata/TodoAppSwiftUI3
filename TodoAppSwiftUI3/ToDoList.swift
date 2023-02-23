@@ -7,8 +7,11 @@
 
 import SwiftUI
 import CoreData
+import RiveRuntime
 
 struct ToDoList: View {
+//    @State private var riveVm = RiveViewModel(fileName: "swipe", stateMachineName: "State Machine 1")
+    
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(
@@ -20,6 +23,7 @@ struct ToDoList: View {
     @State private var notDoneOnly = false
     
     var body: some View {
+        var riveVm = RiveViewModel(fileName: "swipe", stateMachineName: "State Machine 1")
         NavigationView {
             List {
                 Section {
@@ -42,9 +46,7 @@ struct ToDoList: View {
                                 .foregroundColor(getCategoryColor(toDoItem: item))
                                 .frame(width: 30, height: 30)
                                 .onTapGesture {
-                                    withAnimation {
-                                        ViewContextMethods.isDone(item: item, context: viewContext)
-                                    }
+                                    riveVm.setInput("Swipe Direction", value: 50.0)
                                 }
                                 .padding(.trailing, 10)
                             
@@ -70,8 +72,14 @@ struct ToDoList: View {
                         }
                         .frame(maxHeight: 130)
                         .listRowSeparator(.hidden) // no separators
+                        .swipeActions {
+                            riveVm.view()
+                        }
                     }
                     .onDelete(perform: deleteItems)
+                    .swipeActions {
+                        riveVm.view()
+                    }
                 }
             }
             .listStyle(InsetGroupedListStyle())
@@ -79,7 +87,7 @@ struct ToDoList: View {
                 //await store.loadStats()
                 print("refreshed")
             }
-            .searchable("Search in history", text: $searchQuery, placement: .automatic)
+//            .searchable("Search in history", text: $searchQuery, placement: .automatic)
             .navigationTitle("All todo items")
             
         }

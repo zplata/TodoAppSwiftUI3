@@ -112,13 +112,13 @@ struct NewItem: View {
                         }
                         .frame(maxWidth: .infinity)
                     })
-                        .buttonStyle(BorderedButtonStyle(shape: .roundedRectangle))
-                        .tint(.indigo)
-                        .controlProminence(.increased)
-                        .controlSize(.large)
-                        .shadow(color: .black.opacity(0.1), radius: 20, x: 5, y: 10)
-                        .shadow(color: .black.opacity(0.1), radius: 1, x: 1, y: 1)
-                        .shadow(color: .white.opacity(1), radius: 5, x: -1, y: -1)
+//                        .buttonStyle(BorderedButtonStyle(shape: .roundedRectangle))
+//                        .tint(.indigo)
+//                        .controlProminence(.increased)
+//                        .controlSize(.large)
+//                        .shadow(color: .black.opacity(0.1), radius: 20, x: 5, y: 10)
+//                        .shadow(color: .black.opacity(0.1), radius: 1, x: 1, y: 1)
+//                        .shadow(color: .white.opacity(1), radius: 5, x: -1, y: -1)
                         .padding()
                     
                 }

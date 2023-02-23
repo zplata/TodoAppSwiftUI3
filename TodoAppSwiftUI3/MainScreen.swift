@@ -70,8 +70,8 @@ struct ContentCell: View {
 
 
 extension View {
-    func addButtonActions(leadingButtons: [CellButtons], trailingButton: [CellButtons], onClick: @escaping (CellButtons) -> Void) -> some View {
-        self.modifier(SwipeContainerCell(leadingButtons: leadingButtons, trailingButton: trailingButton, onClick: onClick))
+    func addButtonActions(rowSize: CGFloat, leadingButtons: [CellButtons], trailingButton: [CellButtons], onClick: @escaping (CellButtons) -> Void) -> some View {
+        self.modifier(SwipeContainerCell(rowSize: rowSize, leadingButtons: leadingButtons, trailingButton: trailingButton, onClick: onClick))
     }
 }
 
@@ -90,19 +90,23 @@ struct SwipeContainerCell: ViewModifier  {
     let trailingButton: [CellButtons]
     let leftRiveVm: RiveViewModel
     let rightRiveVm: RiveViewModel
+    
+    let rowSize: CGFloat
 
     let maxLeadingOffset: CGFloat
     let minTrailingOffset: CGFloat
     let onClick: (CellButtons) -> Void
     
-    init(leadingButtons: [CellButtons], trailingButton: [CellButtons], onClick: @escaping (CellButtons) -> Void) {
+    init(rowSize: CGFloat, leadingButtons: [CellButtons], trailingButton: [CellButtons], onClick: @escaping (CellButtons) -> Void) {
+        self.rowSize = rowSize
         self.leftRiveVm = RiveViewModel(fileName: "swipe", stateMachineName: "State Machine 1", fit: .cover, alignment: .centerLeft)
         self.rightRiveVm = RiveViewModel(fileName: "swipe", stateMachineName: "State Machine 1", fit: .cover, alignment: .centerRight)
         self.leadingButtons = leadingButtons
         self.trailingButton = trailingButton
         // TODO: These are arbitrary values, ideally its the width of the todo item row
-        maxLeadingOffset = 250
-        minTrailingOffset = -250
+        maxLeadingOffset = (rowSize - 60)
+        debugPrint("MAX SIZE \(rowSize)")
+        minTrailingOffset = (rowSize - 60) * -1
         self.onClick = onClick
     }
     
@@ -122,9 +126,10 @@ struct SwipeContainerCell: ViewModifier  {
             let totalSlide = value.translation.width + oldOffset
             // TODO: Need to find the max slide to get a percentage
             if totalSlide >= 0 {
-                leftRiveVm.setInput("Swipe Direction", value: totalSlide)
+                debugPrint("HIT \((totalSlide / maxLeadingOffset) * 100)")
+                leftRiveVm.setInput("Swipe Direction", value: (totalSlide / maxLeadingOffset) * 100)
             } else {
-                rightRiveVm.setInput("Swipe Direction", value: totalSlide)
+                rightRiveVm.setInput("Swipe Direction", value: (totalSlide / maxLeadingOffset) * 100)
             }
             if  (0...Int(maxLeadingOffset) ~= Int(totalSlide)) || (Int(minTrailingOffset)...0 ~= Int(totalSlide)) { //left to right slide
                 withAnimation{
@@ -139,13 +144,15 @@ struct SwipeContainerCell: ViewModifier  {
                 reset()
              } else if  visibleButton == .right && value.translation.width > 20 { ///user dismisses right buttons
                 reset()
-             } else if offset > 25 || offset < -25 { ///scroller more then 50% show button
+             } else if offset > (rowSize / 2) || offset < ((rowSize / 2) * -1) { ///scroller more then 50% show button
                 if offset > 0 {
                     visibleButton = .left
                     offset = maxLeadingOffset
+                    leftRiveVm.setInput("Swipe Direction", value: 100.0)
                 } else {
                     visibleButton = .right
                     offset = minTrailingOffset
+                    leftRiveVm.setInput("Swipe Direction", value: -100.0)
                 }
                 oldOffset = offset
                 ///Bonus Handling -> set action if user swipe more then x px
@@ -204,11 +211,11 @@ struct MainScreen: View {
                 })
                 {
                     ForEach(1...10, id: \.self) { count in
-                        ContentCell(data: "cell \(count)")
-                            .addButtonActions(leadingButtons: [.save],
-                                              trailingButton:  [.delete], onClick: { button in
-                                                print("clicked: \(button)")
-                                              })
+                            ContentCell(data: "cell \(count)")
+                            .addButtonActions(rowSize: UIScreen.main.bounds.size.width, leadingButtons: [.save],
+                                                  trailingButton:  [.delete], onClick: { button in
+                                                    print("clicked: \(button)")
+                                                  })
                     }
                 }
             })
